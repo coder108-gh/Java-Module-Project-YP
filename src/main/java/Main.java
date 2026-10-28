@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -25,38 +27,41 @@ public class Main {
         }
         return line;
     }
+    public static int readInt(Scanner scanner, String prompt, String errorMess, int minV, int maxV) {
+        String tmp;
+        ArrayList<Character> digits = new ArrayList<>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
+
+        int n = -1;
+        boolean isOk;
+        while (n==-1) {
+            isOk = true;
+            tmp = readLine(scanner, prompt);
+            for( char ch: tmp.toCharArray()) {
+                if(!digits.contains(ch)) {
+                    isOk = false;
+                    System.out.println(errorMess);
+                    break;
+                }
+            }
+            if (isOk) {
+                n = Integer.parseInt(tmp);
+                if(n<minV || n>maxV) {
+                    System.out.println(errorMess);
+                    n = -1;
+                }
+            }
+
+        }
+        return n;
+    }
     public static String readName(Scanner scanner, int carNumber) {
         return readLine(scanner, String.format("— Введите название машины №%d:", carNumber));
     }
 
-    public static void printInvalidSpeed(String prompt) {
-        System.out.println("— Неправильная скорость");
-        System.out.println(prompt);
-
-    }
     public static int readSpeed(Scanner scanner, int carNumber) {
         int speed = 0;
         String prompt = String.format("— Введите скорость машины №%d:", carNumber);
-        System.out.println(prompt);
-        while(true){
-            if (scanner.hasNextInt()) {
-                speed = scanner.nextInt();
-                if (speed>=0 && speed<=250) {
-                    if (scanner.hasNextLine()){
-                        scanner.nextLine();
-                    }
-                    return speed;
-                }
-                else {
-                    printInvalidSpeed(prompt);
-                }
-            }
-            else {
-                scanner.nextLine();
-                printInvalidSpeed(prompt);
-            }
-        }
-
+        return readInt(scanner, prompt, "— Неправильная скорость", 0, 250);
     }
 
     public static Car readCar(int carNumber, Scanner scanner) {
