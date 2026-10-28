@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Race {
-    Car leader;
-    int duration;
+    private Car leader;
+    private int duration;
     ArrayList<Car> cars = new ArrayList<>();
     Race(int duration) {
         this.duration = duration;
@@ -10,7 +10,7 @@ public class Race {
     void addCar(Car car) {
         cars.add(car);
     }
-    void getLeader() {
+    String getLeader() {
         int dist = 0;
         int tempDist = 0;
 
@@ -21,10 +21,7 @@ public class Race {
                 dist = tempDist;
             }
         }
-    }
-    String getLeaderName() {
         return this.leader.name;
     }
-
 
 }
