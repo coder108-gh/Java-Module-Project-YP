@@ -43,8 +43,29 @@ public class Main {
                     break;
                 }
             }
-            if (isOk) {
+            //if (isOk) {
+            // поскольку исключения мы не проходили
+            // -я упорно "горожу огород" без них.
+            // подозреваю, что все далжно решаться через
+            // scanner.nextInt() / scanner.hasNextInt()
+            // но у меня не хватает мозгов, "как это вывернуть"
+            // про parseInt - правда, тоже не проходили, но я подумал,
+            // что это "меньший" "выход за границы"
+            if (isOk && tmp.length()<4)  {
                 n = Integer.parseInt(tmp);
+                if(n<minV || n>maxV) {
+                    System.out.println(errorMess);
+                    n = -1;
+                }
+            }
+            // ну и с Исключением -
+            /*try {
+                n = Integer.parseInt(tmp);
+            } catch (NumberFormatException _) {
+                ;
+            }*/
+
+            if (isOk || tmp.length()<4)  {
                 if(n<minV || n>maxV) {
                     System.out.println(errorMess);
                     n = -1;
